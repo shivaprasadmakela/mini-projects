@@ -1,0 +1,46 @@
+.mainTodoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  background-color: var(--bg-color);
+  align-items: center;
+      padding: 30px;
+
+}
+
+.topTodoHeader{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.todoItem{
+    width: 700px;
+height: 50px;
+border-radius: 8px;
+border-width: 1px;
+opacity: 1;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+}
+
+
+.todosContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .todoItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+  }
+}

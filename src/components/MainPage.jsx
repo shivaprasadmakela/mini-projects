@@ -9,8 +9,12 @@ function MainPage() {
   const [theme, setTheme] = useState("light");
 
   const projectData = [
+    { name: "Counter App", link: "/counter" },
+
     { name: "To do", link: "/todo" },
-    { name: "Task Now", link: "/task" },
+    { name: "Greeting", link: "/greeting" },
+        { name: "Form", link: "/form" },
+
   ];
 
   useEffect(() => {

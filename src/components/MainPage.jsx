@@ -14,6 +14,8 @@ function MainPage() {
     { name: "To do", link: "/todo" },
     { name: "Greeting", link: "/greeting" },
         { name: "Form", link: "/form" },
+                { name: "Random", link: "/random" },
+
 
   ];
 

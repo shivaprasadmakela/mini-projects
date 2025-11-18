@@ -4,6 +4,7 @@ import TodoApp from "./projects/TodoApp/TodoApp";
 import CounterApp from "./projects/CounterApp/Counter";
 import Greet from "./projects/Greeting/Greet";
 import Form from "./projects/Form/Form"
+import MainRandom from "./projects/Random/MainRandom"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/counter" element={<CounterApp />} />
         <Route path="/greeting" element={<Greet />} />
         <Route path="/form" element={<Form />} />
+        <Route path="/random" element={<MainRandom />} />
       </Routes>
     </Router>
   );

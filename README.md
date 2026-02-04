@@ -1,16 +1,49 @@
-# React + Vite
+# Practice Projects Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A collection of interactive React applications built for practice and learning. This repository serves as a hub for various small projects, demonstrating different React concepts and state management techniques.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **The Artist Gate**: A unique entry mechanism requiring a specific passphrase ("Hello World") to access the project gallery.
+- **Theme Support**: Built-in light and dark mode toggle.
+- **Project Gallery**:
+  - **Counter App**: Basic state management exercise.
+  - **To do**: A task management application.
+  - **Greeting**: Dynamic greeting component.
+  - **Form**: Handling user inputs and validations.
+  - **Random**: Randomly generated content or behavior.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [React](https://reactjs.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Sass (SCSS)](https://sass-lang.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Routing**: [React Router](https://reactrouter.com/)
+- **Icons**: [Font Awesome](https://fontawesome.com/)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Accessing the Projects
+
+To see the list of projects, type **"Hello World"** in the input field on the landing page.

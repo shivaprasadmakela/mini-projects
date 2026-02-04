@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Greeting from "./Greeting";
+import styles from "./Greet.module.scss";
 
 function Greet() {
   const [name, setName] = useState("");
@@ -7,21 +8,31 @@ function Greet() {
   const handleClear = () => setName("");
 
   return (
-    <div style={{ padding: "20px" }} className="centerMainDiv">
-      <h2>💬 Greeting with Props</h2>
+    <div className="page-wrapper">
+      <div className={styles.greetContainer}>
+        <h2>💬 Greeting with Props</h2>
 
-      <input
-        type="text"
-        placeholder="Enter Name"
-        value={name}
-        className="input-field"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button onClick={handleClear}>Clear</button>
+        <div className={styles.inputGroup}>
+          <input
+            type="text"
+            placeholder="Enter your name..."
+            value={name}
+            className="input-field"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <p className={styles.charCount}>Character count: {name.length}</p>
+        </div>
 
-      <p>Character count: {name.length}</p>
+        <div className={styles.buttonGroup}>
+          <button onClick={handleClear} disabled={!name}>
+            Clear
+          </button>
+        </div>
 
-      <Greeting name={name} />
+        <div className={styles.greetingWrapper}>
+          <Greeting name={name} />
+        </div>
+      </div>
     </div>
   );
 }

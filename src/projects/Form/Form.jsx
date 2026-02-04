@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./Form.module.scss";
 
 function Form() {
   const [formData, setFormData] = useState({
@@ -14,60 +15,78 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
     setSubmittedData(formData);
     setFormData({ name: "", email: "", message: "" });
   };
 
   return (
-    <div className="centerMainDiv">
-        <h1>Contact Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input
-          name="name"
-          value={formData.name}
-          className="input-field"
-          onChange={handleChange}
-          placeholder="Enter your name"
-        />
+    <div className="page-wrapper">
+      <div className={styles.formContainer}>
+        <h1 className={styles.title}>Contact Form</h1>
+        
+        <form onSubmit={handleSubmit} className={styles.formGrid}>
+          <div className={styles.formGroup}>
+            <label htmlFor="name">Full Name</label>
+            <input
+              id="name"
+              name="name"
+              value={formData.name}
+              className="input-field"
+              onChange={handleChange}
+              placeholder="Elon Musk"
+              required
+            />
+          </div>
 
-        <br />
+          <div className={styles.formGroup}>
+            <label htmlFor="email">Email Address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="input-field"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="elon@mars.com"
+              required
+            />
+          </div>
 
-        <label>Email:</label>
-        <input
-          name="email"
-          type="email"
-                    className="input-field"
+          <div className={styles.formGroup}>
+            <label htmlFor="message">Your Message</label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              className="input-field"
+              style={{ minHeight: "120px", resize: "vertical" }}
+              placeholder="Tell us everything..."
+              required
+            />
+          </div>
 
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-        />
+          <button type="submit" className={styles.submitBtn}>
+            Send Message
+          </button>
+        </form>
 
-        <br />
-
-        <label>Message:</label>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-                    className="input-field"
-
-          placeholder="Type your message"
-        />
-
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-
-      {submittedData && (
-        <div style={{ marginTop: "10px" }}>
-          <h4>Submitted Data:</h4>
-          <p>Name: {submittedData.name}</p>
-          <p>Email: {submittedData.email}</p>
-          <p>Message: {submittedData.message}</p>
-        </div>
-      )}
+        {submittedData && (
+          <div className={styles.resultsContainer}>
+            <h4>✅ Message Received!</h4>
+            <div className={styles.resultRow}>
+              <strong>Name:</strong> <span>{submittedData.name}</span>
+            </div>
+            <div className={styles.resultRow}>
+              <strong>Email:</strong> <span>{submittedData.email}</span>
+            </div>
+            <div className={styles.resultRow}>
+              <strong>Story:</strong> <span>{submittedData.message}</span>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

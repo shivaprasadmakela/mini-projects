@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import "../commonStyles.scss";
+import styles from "./MainPage.module.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
 
 function MainPage() {
-  const [same, setSame] = useState(false);
+  const [authorized, setAuthorized] = useState(false);
   const [input, setInput] = useState("");
   const [theme, setTheme] = useState("light");
 
   const projectData = [
-    { name: "Counter App", link: "/counter" },
-
-    { name: "To do", link: "/todo" },
-    { name: "Greeting", link: "/greeting" },
-        { name: "Form", link: "/form" },
-                { name: "Random", link: "/random" },
-
-
+    { name: "Counter App", link: "/counter", icon: "fa-solid fa-calculator", desc: "Basic state management demo" },
+    { name: "To-do Suite", link: "/todo", icon: "fa-solid fa-list-check", desc: "Advanced task management" },
+    { name: "Greeting Hub", link: "/greeting", icon: "fa-regular fa-comment-dots", desc: "Dynamic prop handling" },
+    { name: "Pro Forms", link: "/form", icon: "fa-solid fa-wpforms", desc: "Validation & state tracking" },
+    { name: "Utility Box", link: "/random", icon: "fa-solid fa-toolbox", desc: "Hooks & Ref demonstrations" },
   ];
 
   useEffect(() => {
@@ -24,76 +21,86 @@ function MainPage() {
     document.documentElement.setAttribute("data-theme", savedTheme);
     setTheme(savedTheme);
 
-    const saved = localStorage.getItem("same");
-    if (saved === "true") setSame(true);
+    const savedAuth = localStorage.getItem("authorized");
+    if (savedAuth === "true") setAuthorized(true);
   }, []);
 
-  function toggleTheme() {
+  const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
-  }
+  };
 
-  function removeSaved() {
-    localStorage.removeItem("same");
-    setSame(false);
+  const logout = () => {
+    localStorage.removeItem("authorized");
+    setAuthorized(false);
     setInput("");
-  }
+  };
 
-  function handlecheckSameName(value) {
-    if (value === "Hello World") {
-      setSame(true);
-      localStorage.setItem("same", true);
-    } else {
-      setSame(false);
-      localStorage.removeItem("same");
+  const handleCheckAuth = (value) => {
+    if (value.toLowerCase() === "hello world") {
+      setAuthorized(true);
+      localStorage.setItem("authorized", "true");
     }
-  }
+  };
 
   return (
-    <div className="mainPageContainer">
+    <div className={styles.mainPageContainer}>
       <button
         className="theme-toggle-btn"
         onClick={toggleTheme}
-        title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
       >
-        {theme === "light" ? (
-          <i className="fa-solid fa-moon"></i>
-        ) : (
-          <i className="fa-solid fa-sun"></i>
-        )}
+        <i className={`fa-solid ${theme === "light" ? "fa-moon" : "fa-sun"}`}></i>
       </button>
 
-      {!same ? (
-        <div>
-          <p>Please Type "Hello World"</p>
+      {!authorized ? (
+        <div className={styles.gateContainer}>
+          <div className={styles.heroSection}>
+            <h1>Practice Suite</h1>
+            <p>Mastering React one project at a time.</p>
+          </div>
+          <p className={styles.gateTitle}>Unlock the gallery with the Magic Secret...</p>
           <input
             type="text"
-            className="input-field"
-            placeholder="Don’t be shy, type something 👀"
+            className={styles.inputField}
+            placeholder="Type 'Hello World'..."
             value={input}
-            onChange={(event) => {
-              const value = event.target.value;
-              setInput(value);
-              handlecheckSameName(value);
+            onChange={(e) => {
+              const val = e.target.value;
+              setInput(val);
+              handleCheckAuth(val);
             }}
+            autoFocus
           />
         </div>
       ) : (
-        <div>
-          <div className="topContainer">
-            <h1>The Art -- The Artist</h1>
-            <button onClick={removeSaved}>Hit Me!!</button>
+        <div className={styles.projectSection}>
+          <div className={styles.sectionHeader}>
+            <div>
+              <h2>Featured Projects</h2>
+              <p>Select a demonstration to explore.</p>
+            </div>
+            <button onClick={logout} className={styles.resetBtn}>
+              <i className="fa-solid fa-arrow-right-from-bracket"></i> Lock Suite
+            </button>
           </div>
-          <div className="projectContainer">
-            {projectData.map((item) => (
+
+          <div className={styles.projectGrid}>
+            {projectData.map((project) => (
               <Link
-                to={item.link}
-                key={item.name}
-                className="mainProductContainer"
+                to={project.link}
+                key={project.name}
+                className={styles.projectCard}
               >
-                <h3>{item.name}</h3>
+                <div className={styles.iconWrapper}>
+                  <i className={project.icon}></i>
+                </div>
+                <div className={styles.projectInfo}>
+                  <h3>{project.name}</h3>
+                  <p>{project.desc}</p>
+                </div>
               </Link>
             ))}
           </div>

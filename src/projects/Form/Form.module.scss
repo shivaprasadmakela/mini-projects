@@ -1,0 +1,82 @@
+@import '../../styles/shared';
+
+.formContainer {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+}
+
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+}
+
+.submitBtn {
+  margin-top: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.resultsContainer {
+  margin-top: 32px;
+  padding: 24px;
+  background-color: rgba(16, 185, 129, 0.05);
+  border: 1px dashed var(--success-color);
+  border-radius: var(--radius-md);
+  width: 100%;
+
+  h4 {
+    color: var(--success-color);
+    margin-bottom: 16px;
+  }
+}
+
+.resultRow {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+
+  strong {
+    width: 80px;
+    color: var(--text-secondary);
+  }
+  
+  span {
+    color: var(--text-primary);
+    word-break: break-all;
+  }
+}

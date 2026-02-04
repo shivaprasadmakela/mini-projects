@@ -1,31 +1,36 @@
 import { useState } from "react";
+import styles from "./Counter.module.scss";
 
+function CounterApp() {
+  const [count, setCount] = useState(0);
 
-function CounterAPP(){
-    const [count, setCount] = useState(0)
+  const increase = () => setCount((prev) => prev + 1);
+  const decrease = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
+  const reset = () => setCount(0);
 
-    function decrease() {
-        if (count === 0) return;
+  return (
+    <div className="page-wrapper">
+      <div className={styles.counterContainer}>
+        <h1 className={styles.title}>Counter App</h1>
+        
+        <div className={styles.countDisplay}>{count}</div>
 
-        setCount(count -1)
-    }
-
-    return (
-        <>
-        <div className="centerMainDiv">
-        <h1>Counter APP {count}</h1>
-        <div>
-            <button onClick={() => setCount(count + 1)}>Increase +</button>
-            <button onClick={decrease}>Decrease -</button>
-            {
-                count === 0 && (
-                    <h5>ok start again..!!!</h5>
-                )
-            }
+        <div className={styles.controls}>
+          <button className={`${styles.btn} ${styles.decrease}`} onClick={decrease} disabled={count === 0}>
+            Decrease
+          </button>
+          <button className={`${styles.btn} ${styles.reset}`} onClick={reset}>
+            Reset
+          </button>
+          <button className={`${styles.btn} ${styles.increase}`} onClick={increase}>
+            Increase
+          </button>
         </div>
-        </div>
-        </>
-    )   
+
+        {count === 0 && <p className={styles.message}>Start clicking to count!</p>}
+      </div>
+    </div>
+  );
 }
 
-export default CounterAPP;
+export default CounterApp;

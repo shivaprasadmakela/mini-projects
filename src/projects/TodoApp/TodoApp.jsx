@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./todo.scss";
+import styles from "./Todo.module.scss";
 import shortUUID from "short-uuid";
 import Toast from "./Toast";
 
@@ -87,132 +87,140 @@ function TodoApp() {
   }, [allTask, filter, search]);
 
   return (
-    <div className="mainTodoContainer">
-      <h1>📝 Advanced Todo App</h1>
+    <div className="page-wrapper">
+      <div className={styles.mainTodoContainer}>
+        <h1 className={styles.title}>📝 Advanced Todo App</h1>
 
-      {/* Input Section */}
-      <div className="topTodoHeader">
-        <input
-          placeholder="Enter a task..."
-          className="input-field"
-          type="text"
-          value={todoName}
-          onChange={(e) => setTodo(e.target.value)}
-        />
-        <input
-          type="date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-        />
-        <select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          className={`priority-${priority.toLowerCase()}`}
-        >
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-
-        <button onClick={addNewTodo}>Add</button>
-      </div>
-
-      {/* Filters + Search + Clear */}
-      {allTask.length > 0 ? (
-        <div className="todoActions">
-          <div className="filters">
-            {["all", "active", "completed"].map((f) => (
-              <button
-                key={f}
-                className={filter === f ? "active" : ""}
-                onClick={() => setFilter(f)}
-              >
-                {f[0].toUpperCase() + f.slice(1)}
-              </button>
-            ))}
-          </div>
-
+        {/* Input Section */}
+        <div className={styles.topTodoHeader}>
           <input
+            placeholder="What needs to be done?"
+            className="input-field"
             type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="searchInput"
+            value={todoName}
+            onChange={(e) => setTodo(e.target.value)}
           />
+          <input
+            type="date"
+            className={styles.dateInput}
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            className={`${styles.prioritySelect} ${styles[`prioritySelector-${priority.toLowerCase()}`]}`}
+          >
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
 
-          <button className="clearBtn" onClick={clearCompleted}>
-            Clear Completed
-          </button>
+          <button className={styles.addBtn} onClick={addNewTodo}>Add Task</button>
         </div>
-      ) : (
-        <div className="noTasksMessage">
-          <p>No tasks yet — start by adding one 👇</p>
-        </div>
-      )}
 
-      {/* Tasks List */}
-      <div className="todosContainer">
-        <AnimatePresence>
-          {filteredTasks.map((item) => {
-            const isOverdue =
-              item.dueDate && new Date(item.dueDate) < new Date() && !item.completed;
-
-            return (
-              <motion.div
-                className={`todoItem priority-${item.priority.toLowerCase()} ${
-                  isOverdue ? "overdue" : ""
-                }`}
-                key={item.id}
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 100, scale: 0.9 }}
-                transition={{ duration: 0.25 }}
-              >
-                <input
-                  type="checkbox"
-                  checked={item.completed}
-                  onChange={() => toggleTodo(item.id)}
-                />
-                <div className="todoText">
-                  <span className={item.completed ? "completed" : ""}>
-                    {item.name}
-                  </span>
-                  <div className="todoMeta">
-                    {item.dueDate && (
-                      <small>
-                        Due:{" "}
-                        <span
-                          className={isOverdue ? "due-overdue" : "due-normal"}
-                        >
-                          {item.dueDate}
-                        </span>
-                      </small>
-                    )}
-                    <small className={`tag-${item.priority.toLowerCase()}`}>
-                      {item.priority}
-                    </small>
-                  </div>
-                </div>
+        {/* Filters + Search + Clear */}
+        {allTask.length > 0 ? (
+          <div className={styles.todoActions}>
+            <div className={styles.filters}>
+              {["all", "active", "completed"].map((f) => (
                 <button
-                  className="delete-btn"
-                  onClick={() => deleteTodo(item.id)}
+                  key={f}
+                  className={filter === f ? styles.active : ""}
+                  onClick={() => setFilter(f)}
                 >
-                  ❌
+                  {f[0].toUpperCase() + f.slice(1)}
                 </button>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
+              ))}
+            </div>
 
-      {/* Toast Message */}
-      {toast.message && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() => setToast({ message: "", type: "" })}
-        />
-      )}
+            <input
+              type="text"
+              placeholder="Filter tasks..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className={styles.searchInput}
+            />
+
+            <button className={styles.clearBtn} onClick={clearCompleted}>
+              Clear Completed
+            </button>
+          </div>
+        ) : (
+          <div className={styles.noTasksMessage}>
+            <p>Your task list is empty. Add a new task above!</p>
+          </div>
+        )}
+
+        {/* Tasks List */}
+        <div className={styles.todosContainer}>
+          <AnimatePresence>
+            {filteredTasks.map((item) => {
+              const isOverdue =
+                item.dueDate && new Date(item.dueDate) < new Date() && !item.completed;
+
+              return (
+                <motion.div
+                  className={`${styles.todoItem} ${styles[`priority-${item.priority.toLowerCase()}`]} ${
+                    isOverdue ? styles.overdue : ""
+                  }`}
+                  key={item.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <label className={styles.checkboxContainer}>
+                    <input
+                      type="checkbox"
+                      checked={item.completed}
+                      onChange={() => toggleTodo(item.id)}
+                    />
+                    <span className={styles.checkmark}></span>
+                  </label>
+
+                  <div className={styles.todoText}>
+                    <span className={item.completed ? styles.completed : ""}>
+                      {item.name}
+                    </span>
+                    <div className={styles.todoMeta}>
+                      {item.dueDate && (
+                        <small>
+                          <i className="fa-regular fa-calendar"></i>
+                          <span
+                            className={isOverdue ? styles.dueOverdue : styles.dueNormal}
+                          >
+                            {item.dueDate}
+                          </span>
+                        </small>
+                      )}
+                      <small className={`${styles.tag} ${styles[`tag-${item.priority.toLowerCase()}`]}`}>
+                        {item.priority}
+                      </small>
+                    </div>
+                  </div>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={() => deleteTodo(item.id)}
+                    title="Delete task"
+                  >
+                    <i className="fa-solid fa-trash-can"></i>
+                  </button>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* Toast Message */}
+        {toast.message && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={() => setToast({ message: "", type: "" })}
+          />
+        )}
+      </div>
     </div>
   );
 }

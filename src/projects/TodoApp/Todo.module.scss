@@ -1,0 +1,271 @@
+@import '../../styles/shared';
+
+.mainTodoContainer {
+  @extend .card;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.topTodoHeader {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 12px;
+  align-items: center;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dateInput {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+.prioritySelect {
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+.addBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-weight: 600;
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+}
+
+.todoActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+
+  button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: var(--radius-sm);
+
+    &.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+  }
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 150px;
+  @extend .inputField;
+  max-width: 250px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+}
+
+.clearBtn {
+  color: var(--error-color);
+  border-color: var(--error-color);
+  background: transparent;
+  font-size: 0.8rem;
+
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.05);
+  }
+}
+
+.todosContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &.priority-high { border-left-color: var(--error-color); }
+  &.priority-medium { border-left-color: var(--warning-color); }
+  &.priority-low { border-left-color: var(--success-color); }
+
+  &.overdue {
+    background-color: rgba(239, 68, 68, 0.02);
+  }
+}
+
+.checkboxContainer {
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+  }
+
+  &:hover input ~ .checkmark {
+    border-color: var(--primary-color);
+  }
+
+  input:checked ~ .checkmark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+}
+
+.todoText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  span {
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+
+    &.completed {
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+  }
+}
+
+.todoMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  small {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+
+  &.tag-high { background-color: rgba(239, 68, 68, 0.1); color: var(--error-color); }
+  &.tag-medium { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+  &.tag-low { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+}
+
+.dueOverdue { color: var(--error-color); font-weight: 600; }
+.dueNormal { color: var(--text-muted); }
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.05);
+    transform: scale(1.1);
+  }
+}
+
+.noTasksMessage {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-style: italic;
+}

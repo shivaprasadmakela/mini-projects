@@ -5,72 +5,174 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 32px;
-  padding: 40px;
-  background-color: var(--bg-card);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
+  padding: 48px 32px;
+  background: linear-gradient(145deg, var(--bg-card), var(--bg-color));
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.gameHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.rankBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: rgba(var(--bg-color-rgb), 0.5);
+  border: 2px solid var(--rank-color);
+  border-radius: 24px;
+  color: var(--rank-color);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(var(--rank-color-rgb), 0.2);
+  transition: all var(--transition-base);
+
+  i { font-size: 1.1rem; }
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 900;
   margin: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.displayWrapper {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .countDisplay {
-  font-size: 5rem;
-  font-weight: 800;
-  color: var(--primary-color);
-  font-variant-numeric: tabular-nums;
+  font-size: 6rem;
+  font-weight: 900;
+  color: var(--text-primary);
   line-height: 1;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-variant-numeric: tabular-nums;
+}
+
+.progression {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.progressBarWrapper {
+  width: 100%;
+  height: 10px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.rankTarget {
+  display: flex;
+  justify-content: center;
+  
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    
+    strong { color: var(--text-primary); }
+  }
+}
+
+.maxRank {
+  color: var(--success-color) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .controls {
   display: flex;
   gap: 16px;
+  width: 100%;
 }
 
 .btn {
-  padding: 12px 24px;
-  font-size: 1rem;
+  flex: 1;
+  height: 56px;
+  font-size: 1.25rem;
+  border-radius: var(--radius-md);
   
   &.increase {
+    flex: 2;
     background-color: var(--primary-color);
     color: white;
     border: none;
-    
+    box-shadow: 0 4px 14px rgba(var(--primary-color-rgb), 0.39);
+
     &:hover {
       background-color: var(--primary-hover);
+      box-shadow: 0 6px 20px rgba(var(--primary-color-rgb), 0.23);
     }
   }
 
-  &.decrease {
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-  }
-
-  &.reset {
-    background-color: transparent;
-    border-color: var(--error-color);
-    color: var(--error-color);
+  &.reset, &.decrease {
+    background-color: var(--bg-color);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
 
     &:hover {
-      background-color: rgba(239, 68, 68, 0.05);
+      color: var(--text-primary);
+      border-color: var(--text-muted);
     }
+  }
+
+  &.reset:hover {
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+  }
+
+  &.decrease:hover:not(:disabled) {
+    color: var(--error-color);
+    border-color: var(--error-color);
   }
 }
 
 .message {
-  font-size: 0.875rem;
+  margin: 0;
+  font-size: 0.9rem;
   color: var(--text-muted);
   font-style: italic;
-  margin: 0;
 }

@@ -5,6 +5,7 @@ import CounterApp from "./projects/CounterApp/Counter";
 import Greet from "./projects/Greeting/Greet";
 import Form from "./projects/Form/Form"
 import MainRandom from "./projects/Random/MainRandom"
+import QuizApp from "./projects/QuizApp/QuizApp"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/greeting" element={<Greet />} />
         <Route path="/form" element={<Form />} />
         <Route path="/random" element={<MainRandom />} />
+        <Route path="/quiz" element={<QuizApp />} />
       </Routes>
     </Router>
   );

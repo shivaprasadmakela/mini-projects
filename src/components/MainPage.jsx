@@ -14,6 +14,7 @@ function MainPage() {
     { name: "Greeting Hub", link: "/greeting", icon: "fa-regular fa-comment-dots", desc: "Dynamic prop handling" },
     { name: "Pro Forms", link: "/form", icon: "fa-solid fa-wpforms", desc: "Validation & state tracking" },
     { name: "Utility Box", link: "/random", icon: "fa-solid fa-toolbox", desc: "Hooks & Ref demonstrations" },
+    { name: "Quiz Arena", link: "/quiz", icon: "fa-solid fa-circle-question", desc: "State machines & conditional rendering" },
   ];
 
   useEffect(() => {

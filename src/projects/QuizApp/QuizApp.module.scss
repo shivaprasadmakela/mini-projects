@@ -37,12 +37,12 @@
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.6;
-  max-width: 400px;
+  max-width: 420px;
 }
 
 .statsRow {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -58,9 +58,7 @@
   border-radius: var(--radius-md);
   padding: 8px 14px;
 
-  i {
-    color: var(--primary-color);
-  }
+  i { color: var(--primary-color); }
 }
 
 .startBtn {
@@ -77,24 +75,118 @@
   align-items: center;
   gap: 10px;
 
-  &:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-  }
+  &:hover { opacity: 0.9; transform: translateY(-2px); }
+  &:active { transform: translateY(0); }
+}
 
-  &:active {
-    transform: translateY(0);
+// ── Level Select Screen ───────────────────────────────────────
+
+.levelTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.levelsGrid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.levelCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: var(--level-color);
+    box-shadow: 0 0 0 3px rgba(var(--level-rgb), 0.12);
+  }
+}
+
+.levelIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: rgba(var(--level-rgb), 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--level-color);
+  flex-shrink: 0;
+}
+
+.levelInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.levelLabel {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.levelDesc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.backBtn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  padding: 9px 20px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    background-color: var(--button-hover-bg);
+    border-color: var(--border-hover);
+    transform: none;
   }
 }
 
 // ── Quiz Screen ───────────────────────────────────────────────
 
-.progressHeader {
+.quizTopBar {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.levelBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background-color: rgba(var(--level-rgb), 0.12);
+  color: var(--level-color);
+  border: 1px solid rgba(var(--level-rgb), 0.25);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .questionCount {
@@ -102,7 +194,6 @@
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
 .progressBar {
@@ -115,18 +206,17 @@
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-color), #8b5cf6);
   border-radius: 99px;
 }
 
 .questionText {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
   text-align: left;
   width: 100%;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .optionsGrid {
@@ -157,35 +247,29 @@
     transform: translateX(4px);
   }
 
-  i {
-    font-size: 0.85rem;
-    flex-shrink: 0;
-  }
+  i { font-size: 0.85rem; flex-shrink: 0; }
 }
 
 .correct {
-  border-color: var(--success-color) !important;
+  border-color: #10b981 !important;
   background-color: rgba(16, 185, 129, 0.08) !important;
-  color: var(--success-color) !important;
+  color: #10b981 !important;
   transform: none !important;
-
   &:hover { transform: none !important; }
 }
 
 .wrong {
-  border-color: var(--error-color, #ef4444) !important;
+  border-color: #ef4444 !important;
   background-color: rgba(239, 68, 68, 0.08) !important;
-  color: var(--error-color, #ef4444) !important;
+  color: #ef4444 !important;
   transform: none !important;
-
   &:hover { transform: none !important; }
 }
 
 .dimmed {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: default;
   transform: none !important;
-
   &:hover {
     border-color: var(--border-color);
     background-color: var(--bg-color);
@@ -206,19 +290,19 @@
 
 .feedbackCorrect {
   background-color: rgba(16, 185, 129, 0.1);
-  color: var(--success-color);
+  color: #10b981;
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .feedbackWrong {
   background-color: rgba(239, 68, 68, 0.08);
-  color: var(--error-color, #ef4444);
+  color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
 .nextBtn {
   align-self: flex-end;
-  background-color: var(--primary-color);
+  background-color: var(--level-color, var(--primary-color));
   color: #fff;
   border: none;
   border-radius: var(--radius-md);
@@ -229,18 +313,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: opacity 0.2s, transform 0.1s;
 
-  &:hover:not(:disabled) {
-    background-color: var(--primary-hover);
-    transform: translateY(-1px);
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-  }
+  &:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+  &:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 }
 
 // ── Results Screen ────────────────────────────────────────────
@@ -250,11 +326,7 @@
   width: 140px;
   height: 140px;
 
-  svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-  }
+  svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 }
 
 .ringBg {
@@ -265,10 +337,9 @@
 
 .ringFill {
   fill: none;
-  stroke: url(#quizGrad);
+  stroke: var(--level-color);
   stroke-width: 10;
   stroke-linecap: round;
-  stroke: var(--primary-color);
 }
 
 .scoreLabel {
@@ -308,13 +379,8 @@
   overflow-y: auto;
   padding-right: 4px;
 
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 99px;
-  }
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 99px; }
 }
 
 .breakdownRow {
@@ -332,20 +398,42 @@
 .bCorrect {
   background-color: rgba(16, 185, 129, 0.07);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  color: var(--text-primary);
-
-  i { color: var(--success-color); }
+  i { color: #10b981; }
 }
 
 .bWrong {
   background-color: rgba(239, 68, 68, 0.05);
   border: 1px solid rgba(239, 68, 68, 0.18);
-  color: var(--text-primary);
-
-  i { color: var(--error-color, #ef4444); }
+  i { color: #ef4444; }
 }
 
 .bText {
   color: var(--text-secondary);
   line-height: 1.4;
+}
+
+.resultsActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.retryBtn {
+  background-color: var(--level-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 11px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.15s;
+
+  &:hover { opacity: 0.88; transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
 }

@@ -6,6 +6,8 @@ import Greet from "./projects/Greeting/Greet";
 import Form from "./projects/Form/Form"
 import MainRandom from "./projects/Random/MainRandom"
 import QuizApp from "./projects/QuizApp/QuizApp"
+import Changelog from "./projects/Changelog/Changelog"
+import ProfileSetup from "./projects/ProfileSetup/ProfileSetup"
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/random" element={<MainRandom />} />
         <Route path="/quiz" element={<QuizApp />} />
+        <Route path="/changelog" element={<Changelog />} />
+        <Route path="/profile-setup" element={<ProfileSetup />} />
       </Routes>
     </Router>
   );

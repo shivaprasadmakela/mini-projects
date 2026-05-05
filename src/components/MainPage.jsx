@@ -15,6 +15,8 @@ function MainPage() {
     { name: "Pro Forms", link: "/form", icon: "fa-solid fa-wpforms", desc: "Validation & state tracking" },
     { name: "Utility Box", link: "/random", icon: "fa-solid fa-toolbox", desc: "Hooks & Ref demonstrations" },
     { name: "Quiz Arena", link: "/quiz", icon: "fa-solid fa-circle-question", desc: "State machines & conditional rendering" },
+    { name: "Changelog", link: "/changelog", icon: "fa-solid fa-clock-rotate-left", desc: "Clean timeline presentation" },
+    { name: "Profile Setup", link: "/profile-setup", icon: "fa-solid fa-user-gear", desc: "Accessible form & progress" },
   ];
 
   useEffect(() => {

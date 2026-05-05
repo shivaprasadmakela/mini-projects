@@ -50,16 +50,15 @@ function MainPage() {
 
   return (
     <div className={styles.mainPageContainer}>
-      <button
-        className="theme-toggle-btn"
-        onClick={toggleTheme}
-        aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      >
-        <i className={`fa-solid ${theme === "light" ? "fa-moon" : "fa-sun"}`}></i>
-      </button>
-
       {!authorized ? (
         <div className={styles.gateContainer}>
+          <button
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            <i className={`fa-solid ${theme === "light" ? "fa-moon" : "fa-sun"}`}></i>
+          </button>
           <div className={styles.heroSection}>
             <h1>Practice Suite</h1>
             <p>Mastering React one project at a time.</p>
@@ -85,9 +84,18 @@ function MainPage() {
               <h2>Featured Projects</h2>
               <p>Select a demonstration to explore.</p>
             </div>
-            <button onClick={logout} className={styles.resetBtn}>
-              <i className="fa-solid fa-arrow-right-from-bracket"></i> Lock Suite
-            </button>
+            <div className={styles.headerActions}>
+              <button
+                className={styles.themeToggleBtnInline}
+                onClick={toggleTheme}
+                aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              >
+                <i className={`fa-solid ${theme === "light" ? "fa-moon" : "fa-sun"}`}></i>
+              </button>
+              <button onClick={logout} className={styles.resetBtn}>
+                <i className="fa-solid fa-arrow-right-from-bracket"></i> Lock Suite
+              </button>
+            </div>
           </div>
 
           <div className={styles.projectGrid}>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function MainPage() {
   const [authorized, setAuthorized] = useState(false);
   const [input, setInput] = useState("");
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   const projectData = [
     { name: "Counter App", link: "/counter", icon: "fa-solid fa-calculator", desc: "Basic state management demo" },
@@ -20,7 +20,7 @@ function MainPage() {
   ];
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
     setTheme(savedTheme);
 
